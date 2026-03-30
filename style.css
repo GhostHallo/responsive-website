@@ -1,7 +1,9 @@
-/*Colors */
+@layer global, component, utility;
 
-/* source-sans-3-regular - latin */
-@font-face {
+
+
+
+     @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Source Sans 3';
   font-style: normal;
@@ -16,7 +18,59 @@
   font-weight: 700;
   src: url('/fonts/source-sans-3-v19-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-:root {}
+/* COlors */
+:root{
+  --c-white: hsl(0, 0%, 100%);
+    --c-purple: hsl(232, 58%, 55%);
+    --c-grey-dark: hsl(233, 14%, 25%);
+    --c-teal: hsl(180, 100%, 42%);
+    --c-transparent: transparent;
+    --c-magenta: hsl(320, 85%, 41%);
+
+
+    --color-main-background: var(--c-white);
+    --color-text-dark: var(--c-grey-dark);
+    --color-text-light: var(--c-white);
+    --color-header-background: var(--c-purple);
+    --color-hero-background: var(--c-purple);
+    --color-button-primary-background: var(--c-teal);
+    --color-button-primary-text-color: var(--c-grey-dark);
+    --color-button-secondary-background: var(--c-transparent);
+    --color-button-secondary-border: var(--cc-white);
+    --color-button-secondary-text-color: var(--c-white);
+    --color-fullwidth-bg: var(--c-magenta);
+}
+/* Fonts */
+:root{
+    --fs-14: calc(14 / 16 * 1rem);
+    --fs-16: calc(16 / 16 * 1rem);
+    --fs-24: calc(24 / 16 * 1rem);
+    --fs-36: calc(36 / 16 * 1rem);
+    --fs-42: calc(42 / 16 * 1rem);
+    --fs-48: calc(48 / 16 * 1rem);
+    --fs-72: calc(72 / 16 * 1rem);
+    
+    --font-size-top-nav: var(--fs-14);
+    --font-size-h1: var(--fs-42);
+    --font-size-h2: var(--fs-36);
+    --font-size-h3: var(--fs-24);
+
+
+
+
+    @media(width >= cacl(600 / 16 * 1rem)){
+        --font-size-top-nav: var(--fs-16);
+        --font-size-h1: var(--fs-72);
+        --font-size-h2: var(--fs-48);
+    }
+
+}
+
+
+
+:root {
+
+
     --c-white: hsl(0, 0%, 100%);
     --c-purple: hsl(232, 58%, 55%);
     --c-grey-dark: hsl(233, 14%, 25%);
@@ -35,6 +89,7 @@
     --color-button-secondary-border: var(--cc-white);
     --color-button-secondary-text-color: var(--c-white);
     --color-fullwidth-bg: var(--c-magenta);
+}
 
 
 
@@ -48,6 +103,7 @@
 *::before, 
 ::after {
   box-sizing: border-box;
+  line-height: 1.3;
 }
 
 
@@ -58,8 +114,34 @@
 
 body {
     font-family: "Source Sans 3", Arial, Helvetica, sans-serif;
+    line-height: 1.3;
+    color: var(--color-text-dark);
+    padding-block-end: 50vh; /* Temporary style */
     
 }
+
+h1, 
+h2, 
+h3{
+    line-height: 1.1;
+}
+
+
+h1{
+    font-size: var(--font-size-h1);
+}
+
+
+h2{
+    font-size: var(--font-size-h2);
+}
+
+
+h3{
+    font-size: var(--font-size-h3);
+}
+
+
 
 
 a {
@@ -69,7 +151,9 @@ a {
 img,
 picture, 
 svg {
+
     max-width: 100%;
+    height: auto;
     display: block;
 }
 
@@ -77,5 +161,107 @@ svg {
 .wrapper {
     width: min(calc(100% - 48px), calc(1200 /  16 * 1rem));
     margin-inline: auto;
+}
+
+
+
+
+
+
+@layer component{
+.topnav {
+      background-color: var(--color-header-background);
+
+    .topnav_wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-block: 12px;
+
+        @media(width >= cacl(600 / 16 * 1rem)){
+            padding-block: 20;
+        }
+        
+        
+    }
+    
+    .topnav__homelink {
+        &:hover{
+            opacity: 0.9;
+        
+        }
+        
+        
+
+
+        }
+        .topnav__logo {
+            width: calc(70 / 16 * rem);
+            
+            @media(width >= cacl(600 / 16 * 1rem)){
+                width: calc(128 / 16 * rem);
+            }
+
+            
+            
+
+        }
+        .topnav__links {
+            display: flex;
+            gap: 20px;
+            list-style-type: none;
+            padding: 0;
+          
+            
+             
+            
+
+        }
+        .topnav__item {
+
+        }
+        .topnav__link {
+            font-size: var(--font-size-top-nav);
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            }
+
+            &:hover {
+                text-decoration: underline 2px;
+                text-underline-offset: 4px;
+                @media(width >= cacl(600 / 16 * 1rem)){
+                gap: 40px;
+            }
+            
+
+        }
+    }
+
+}
+
+
+
+@layer utility {
+    .visiually-hidden {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    
+
+    &.skip:focus {
+        left: 0;
+        width: auto;
+        height: auto;
+        background: #fff;
+        padding: 10px;
+        border: 1px solid;
+    }
+}
+
 }
 
